@@ -22,7 +22,7 @@ export function PwConfirm() {
 
   const [isPopup, setIsPopup] = useState(false);
   const [isInput, setIsInput] = useState(false);
-  const [popupMessge, setPopupMessge] = useState('');
+  const [popupMessage, setPopupMessage] = useState('');
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -43,19 +43,17 @@ export function PwConfirm() {
       .toLowerCase();
 
     if (!value) {
-      setPopupMessge('이메일을 입력하세요.');
+      setPopupMessage('이메일을 입력하세요.');
       setIsInput(true);
       return;
     }
 
-    const confirm = users.some(
-      (user) => (user.email || '').toLowerCase() === value,
-    );
+    const confirm = users.some((user) => (user.email || '').toLowerCase() === value);
     if (confirm) {
-      setPopupMessge('확인되었습니다.');
+      setPopupMessage('확인되었습니다.');
       setIsInput(true);
     } else {
-      setPopupMessge('존재하지 않는 이메일입니다.');
+      setPopupMessage('존재하지 않는 이메일입니다.');
     }
     setIsPopup(true);
   }
@@ -78,11 +76,7 @@ export function PwConfirm() {
         </LoginButton>
         <div>
           비밀번호 생각났어요!{' '}
-          <button
-            onClick={() => navigate('/')}
-            type="button"
-            className="text-[#3058bd] font-bold"
-          >
+          <button onClick={() => navigate('/')} type="button" className="text-[#3058bd] font-bold">
             돌아가기
           </button>
         </div>
@@ -126,11 +120,7 @@ export function PwConfirm() {
         </div>
       </main>
 
-      <LoginModal
-        openModal={openModal}
-        title={'비밀번호 찾기'}
-        footer={footer()}
-      >
+      <LoginModal openModal={openModal} title={'비밀번호 찾기'} footer={footer()}>
         <form id="pwConfirmForm" onSubmit={handleSubmit}>
           <div className="flex justify-between gap-2">
             <LoginInput
@@ -161,7 +151,7 @@ export function PwConfirm() {
             disabled={!isInput}
             onChange={(e) => {
               const next = e.target.value;
-              setForm((p) => ({ ...p, password: next }));
+              setForm((password) => ({ ...password, password: next }));
               setTouched((t) => ({ ...t, password: true }));
             }}
             error={touched.password ? errors.password : ''}
@@ -174,7 +164,7 @@ export function PwConfirm() {
             disabled={!isInput}
             onChange={(e) => {
               const next = e.target.value;
-              setForm((p) => ({ ...p, confirm: next }));
+              setForm((confirm) => ({ ...confirm, confirm: next }));
               setTouched((t) => ({ ...t, confirm: true }));
             }}
             error={touched.confirm ? errors.confirm : ''}
@@ -188,7 +178,7 @@ export function PwConfirm() {
         footer={emailfooter()}
         onClose={() => setIsPopup(false)}
       >
-        {popupMessge}
+        {popupMessage}
       </LoginModal>
     </div>
   );

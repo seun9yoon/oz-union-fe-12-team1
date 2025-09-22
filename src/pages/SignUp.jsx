@@ -31,7 +31,7 @@ export function SignUp() {
   const [isFormInput, setIsFormInput] = useState(true);
   const [isSendModal, setIsSendModal] = useState(false);
   const [modalConfirm, setModalConfirm] = useState('');
-  const [ismodalConfirm, setIsModalConfirm] = useState(false);
+  const [isModalConfirm, setIsModalConfirm] = useState(false);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -54,8 +54,7 @@ export function SignUp() {
     form.birth.length &&
     form.password.length &&
     form.confirm.length;
-  const noError =
-    !errors.email && !errors.name && !errors.password && !errors.confirm;
+  const noError = !errors.email && !errors.name && !errors.password && !errors.confirm;
   const onButton = agreed && noError && forms;
 
   const codeConfirm = (emailCode) => {
@@ -78,16 +77,13 @@ export function SignUp() {
           size="md"
           disabled={!onButton}
           form="signupForm"
+          onClick={() => navigate('/')}
         >
           회원가입
         </LoginButton>
         <div>
           생각해보니 가입했었네!?{' '}
-          <button
-            onClick={() => navigate('/')}
-            type="button"
-            className="text-[#3058bd] font-bold"
-          >
+          <button onClick={() => navigate('/')} type="button" className="text-[#3058bd] font-bold">
             돌아가기
           </button>
         </div>
@@ -98,11 +94,7 @@ export function SignUp() {
   const close = () => {
     return (
       <div className="mt-6">
-        <Button
-          variant="common"
-          size="md"
-          onClick={() => setIsSendModal(false)}
-        >
+        <Button variant="common" size="md" onClick={() => setIsSendModal(false)}>
           닫기
         </Button>
       </div>
@@ -112,11 +104,7 @@ export function SignUp() {
   const confirmClose = () => {
     return (
       <div className="mt-6">
-        <Button
-          variant="common"
-          size="md"
-          onClick={() => setIsModalConfirm(false)}
-        >
+        <Button variant="common" size="md" onClick={() => setIsModalConfirm(false)}>
           닫기
         </Button>
       </div>
@@ -150,11 +138,7 @@ export function SignUp() {
       </main>
 
       <LoginModal openModal={openModal} title="회원가입" footer={footer()}>
-        <form
-          id="signupForm"
-          className="flex flex-col gap-1 mt-2"
-          onSubmit={handleSubmit}
-        >
+        <form id="signupForm" className="flex flex-col gap-1 mt-2" onSubmit={handleSubmit}>
           <div className="flex justify-between gap-2">
             <LoginInput
               label={'이메일'}
@@ -206,7 +190,7 @@ export function SignUp() {
             type={'text'}
             placeholder="이름을 입력하세요"
             value={form.name}
-            onChange={(e) => setForm((p) => ({ ...p, name: e.target.value }))}
+            onChange={(e) => setForm((name) => ({ ...name, name: e.target.value }))}
             onBlur={() => setTouched((t) => ({ ...t, name: true }))}
             error={touched.name ? errors.name : ''}
             disabled={isFormInput}
@@ -216,9 +200,7 @@ export function SignUp() {
             type={'date'}
             placeholder="생년월일 작성"
             value={form.birth}
-            onChange={(e) =>
-              setForm((prev) => ({ ...prev, birth: e.target.value }))
-            }
+            onChange={(e) => setForm((prev) => ({ ...prev, birth: e.target.value }))}
             onBlur={() => setTouched((t) => ({ ...t, birth: true }))}
             error={touched.birth ? errors.birth : ''}
             disabled={isFormInput}
@@ -230,7 +212,7 @@ export function SignUp() {
             value={form.password}
             onChange={(e) => {
               const next = e.target.value;
-              setForm((p) => ({ ...p, password: next }));
+              setForm((password) => ({ ...password, password: next }));
               setTouched((t) => ({ ...t, password: true }));
             }}
             error={touched.password ? errors.password : ''}
@@ -243,7 +225,7 @@ export function SignUp() {
             value={form.confirm}
             onChange={(e) => {
               const next = e.target.value;
-              setForm((p) => ({ ...p, confirm: next }));
+              setForm((confirm) => ({ ...confirm, confirm: next }));
               setTouched((t) => ({ ...t, confirm: true }));
             }}
             error={touched.confirm ? errors.confirm : ''}
@@ -267,7 +249,7 @@ export function SignUp() {
         인증번호를 발송했습니다.
       </LoginModal>
 
-      <LoginModal openModal={ismodalConfirm} footer={confirmClose()}>
+      <LoginModal openModal={isModalConfirm} footer={confirmClose()}>
         {modalConfirm}
       </LoginModal>
     </div>
