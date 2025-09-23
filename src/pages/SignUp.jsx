@@ -42,6 +42,7 @@ export function SignUp() {
       password: true,
       confirm: true,
     });
+    navigate('/');
   }
 
   const errors = newError(form);
@@ -50,7 +51,7 @@ export function SignUp() {
 
   const forms =
     form.email.length &&
-    form.password.length &&
+    form.name.length &&
     form.birth.length &&
     form.password.length &&
     form.confirm.length;
@@ -77,7 +78,6 @@ export function SignUp() {
           size="md"
           disabled={!onButton}
           form="signupForm"
-          onClick={() => navigate('/')}
         >
           회원가입
         </LoginButton>
@@ -167,7 +167,7 @@ export function SignUp() {
           <div className="flex justify-between gap-2">
             <LoginInput
               label={'인증번호'}
-              type={'password'}
+              type={'text'}
               placeholder="인증번호를 입력하세요"
               value={form.code}
               onChange={(e) => {
